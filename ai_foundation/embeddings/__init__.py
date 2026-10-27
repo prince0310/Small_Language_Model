@@ -1,0 +1,1 @@
+from .load_embedding import load_gemma_embeddings
