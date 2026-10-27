@@ -11,6 +11,17 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Train
+
+Edit the settings in `configs/shakespeare.toml` (or copy it to make a new config), then run:
+
+```bash
+python -m ai_foundation.train --config configs/shakespeare.toml
+```
+
+It prints the loss and a text sample after each epoch, and saves `model.pt`,
+`tokenizer.pkl` and `history.json` to the `[output] dir` folder.
+
 ## Roadmap
 
 - [x] 0. Project setup

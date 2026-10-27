@@ -1,0 +1,36 @@
+# Training config for a small Shakespeare language model.
+# Run with:  python -m ai_foundation.train --config configs/shakespeare.toml
+
+[data]
+path = "data/shakespeare.txt"
+max_chars = 0              # 0 = use the whole file; e.g. 200000 for a quick run
+validation_split = 0.1     # last 10% of the text is used for validation
+
+[tokenizer]
+type = "bpe"               # "bpe" or "char"
+num_merges = 300           # BPE only: number of merge rounds
+
+[model]
+max_length = 64            # context length (tokens the model sees at once)
+embedding_dim = 128
+mlp_dim = 512              # usually 4 x embedding_dim
+num_heads = 4              # must divide embedding_dim
+num_blocks = 2
+dropout_rate = 0.1
+activation_function = "relu"   # "relu", "gelu" or "silu"
+
+[training]
+epochs = 5
+batch_size = 32
+optimizer = "adamw"        # "adamw" or "sgd"
+learning_rate = 5e-4
+seed = 42
+device = "auto"            # "auto", "cpu", "mps" or "cuda"
+
+[generation]
+prompt = "ROMEO:"
+max_tokens = 40            # tokens to generate after each printed epoch
+print_every = 1
+
+[output]
+dir = "checkpoints/shakespeare"
